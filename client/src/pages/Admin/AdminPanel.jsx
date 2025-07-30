@@ -7,6 +7,8 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import axios from "axios";
 
+const Api = import.meta.env.VITE_BACKEND_URL;
+
 const AdminPanel = () => {
   // for searchbar
   const [search, setSearch] = useState("");
@@ -52,7 +54,7 @@ const AdminPanel = () => {
 
   const fetchRes = () => {
      axios
-       .get("/api/blogs")
+       .get(`${Api}/api/blogs`)
        .then((res) => setGetdata(res.data))
        .catch((error) => console.error("Error fetching users:", error));
   };

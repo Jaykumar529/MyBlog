@@ -7,6 +7,7 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import LikeButton from "../components/LikeButton";
 import ShareButton from "../components/ShareButton";
+const Api = import.meta.env.VITE_BACKEND_URL;
 
 const BlogDetail = () => {
   const { id } = useParams();
@@ -15,7 +16,7 @@ const BlogDetail = () => {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const res = await axios.get(`/api/blogs/${id}`);
+        const res = await axios.get(`${Api}/api/blogs/${id}`);
         setBlog(res.data);
       } catch (err) {
         console.error("Error fetching blog:", err.message);

@@ -3,10 +3,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+
+const Api = import.meta.env.VITE_BACKEND_URL;
+
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
+  
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -15,10 +19,9 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:8080/api/auth/login",
+        `${Api}/api/auth/login`,
         formData
       );
-
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("role", res.data.user.isAdmin ? "admin" : "user");
       localStorage.setItem("user", JSON.stringify(res.data.user));

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+const Api = import.meta.env.VITE_BACKEND_URL;
 const CommentSection = ({ blogId }) => {
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState("");
@@ -11,7 +12,7 @@ const CommentSection = ({ blogId }) => {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const res = await axios.get(`/api/blogs/${blogId}/comments`);
+        const res = await axios.get(`${Api}/api/blogs/${blogId}/comments`);
         setComments(res.data);
       } catch (err) {
         console.error("Failed to fetch comments:", err);
@@ -26,7 +27,7 @@ const CommentSection = ({ blogId }) => {
     if (!commentText.trim()) return;
     try {
       const res = await axios.post(
-        `/api/blogs/${blogId}/comment`,
+        `${Api}/api/blogs/${blogId}/comment`,
         { text: commentText },
         {
           headers: {

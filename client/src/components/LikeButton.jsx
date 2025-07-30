@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import axios from "axios";
 
+const Api = import.meta.env.VITE_BACKEND_URL;
+
 const LikeButton = ({ blogId, initialLikes = 0 }) => {
   const [likes, setLikes] = useState(initialLikes);
   const [liked, setLiked] = useState(false);
@@ -13,7 +15,7 @@ const LikeButton = ({ blogId, initialLikes = 0 }) => {
    useEffect(() => {
      const fetchLikes = async () => {
        try {
-         const res = await axios.get(`/api/blogs/${blogId}`);
+         const res = await axios.get(`${Api}/api/blogs/${blogId}`);
          setLikes(res.data.likes.length);
          const userId = localStorage.getItem("userId"); 
          setLiked(res.data.likes.includes(userId));
@@ -31,7 +33,7 @@ const LikeButton = ({ blogId, initialLikes = 0 }) => {
     }
 
     try {
-      const res  = await axios.post(`/api/blogs/${blogId}/like`, {}, {
+      const res  = await axios.post(`${Api}/api/blogs/${blogId}/like`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setLiked(res.data.liked);

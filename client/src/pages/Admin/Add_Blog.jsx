@@ -2,6 +2,8 @@ import axios from "axios";
 import { X } from "lucide-react";
 import React, { useRef, useState } from "react";
 
+const Api = import.meta.env.VITE_BACKEND_URL;
+
 const Add_Blog = ({ onClose }) => {
   const modalRef = useRef();
   const [file, setFile] = useState("");
@@ -28,7 +30,7 @@ const Add_Blog = ({ onClose }) => {
     resData.append("formData", JSON.stringify(formattedData));
 
     try {
-      await axios.post("/api/blogs", resData, {
+      await axios.post(`${Api}/api/blogs`, resData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,

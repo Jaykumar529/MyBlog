@@ -14,7 +14,10 @@ dotenv.config();
 const app = express();
 connectDB();
 const corsOptions = {
-  origin: "http://localhost:5173", // Allow requests from this origin
+   origin: [
+     "http://localhost:5173", // local dev
+     "https://your-frontend.vercel.app", // production
+   ], 
   credentials: true,
   optionsSuccessStatus: 200,
 };

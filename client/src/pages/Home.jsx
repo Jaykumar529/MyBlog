@@ -3,12 +3,15 @@ import { useEffect, useState } from "react";
 import BlogList from "../components/BlogList";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+
+const Api = import.meta.env.VITE_BACKEND_URL;
+
 const Home = () => {
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
     axios
-      .get("/api/blogs")
+      .get(`${Api}/api/blogs`)
       .then((res) => setBlogs(res.data))
       .catch((err) => console.error(err));
   }, []);

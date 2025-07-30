@@ -2,6 +2,7 @@ import axios from "axios";
 import { X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
+const Api = import.meta.env.VITE_BACKEND_URL;
 const Update_Blogs = ({ onClose, oldData }) => {
   const modalRef = useRef();
   const [image, setImage] = useState("");
@@ -66,7 +67,7 @@ const Update_Blogs = ({ onClose, oldData }) => {
 
       const token = localStorage.getItem("token");
 
-      await axios.put(`http://127.0.0.1:8080/api/blogs/${oldData._id}`, form, {
+      await axios.put(`${Api}/api/blogs/${oldData._id}`, form, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,

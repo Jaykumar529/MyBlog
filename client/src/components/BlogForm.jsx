@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../utils/api";
 
+const Api = import.meta.env.VITE_BACKEND_URL;
 const BlogForm = ({ mode, blogId }) => {
   const navigate = useNavigate();
   const [file, setFile] = useState(null);
@@ -13,7 +14,7 @@ const BlogForm = ({ mode, blogId }) => {
 
   useEffect(() => {
     if (mode === "edit" && blogId) {
-      axios.get(`/api/blogs/${blogId}`).then((res) => {
+      axios.get(`${Api}/api/blogs/${blogId}`).then((res) => {
         setFormData({
           title: res.data.title,
           content: res.data.content,
@@ -48,9 +49,9 @@ const BlogForm = ({ mode, blogId }) => {
     };
 
     if (mode === "add") {
-      await axios.post("/api/blogs", form, config);
+      await axios.post(`${Api}/api/blogs`, form, config);
     } else {
-      await axios.put(`/api/blogs/${blogId}`, form, config);
+      await axios.put(`${Api}/api/blogs/${blogId}`, form, config);
     }
 
     navigate("/admin/dashboard");
