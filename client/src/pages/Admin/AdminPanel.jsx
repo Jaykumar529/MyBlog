@@ -112,13 +112,6 @@ const AdminPanel = () => {
     fetchRes(); // Refresh data after adding a new blog
   };
 
-  const openpage = (d) => {
-    const id = d._id;
-    navigate(`/dashboard/restaurent/${id}`, {
-      state: { name: d.name, location: d.location },
-    });
-  };
-  
   // search filtering
   const filterdata = getdata.filter(
     (d) =>
@@ -215,7 +208,6 @@ const AdminPanel = () => {
                     src={d.mediaUrl}
                     alt=""
                     className="h-28 w-36 rounded-2xl cursor-pointer transition-transform duration-300 hover:scale-105"
-                    onClick={() => openpage(d)}
                   />
                 </div>
 
